@@ -1,10 +1,10 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Cube, Sparkles, Layers, SlidersHorizontal } from 'lucide-react'
+import { Box, Sparkles, Layers, SlidersHorizontal } from 'lucide-react'
 
 const features = [
   {
-    icon: Cube,
+    icon: Box,
     title: 'Modular By Design',
     body: 'Assemble the perfect footprint for your space with interchangeable panels and corners that click together with precision.'
   },
