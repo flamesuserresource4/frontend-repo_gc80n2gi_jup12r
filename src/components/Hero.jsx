@@ -1,16 +1,27 @@
 import React from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import Spline from '@splinetool/react-spline'
+const Spline = React.lazy(() => import('@splinetool/react-spline'))
 
 export default function Hero() {
   const { scrollY } = useScroll()
   const opacity = useTransform(scrollY, [0, 400], [1, 0.2])
   const y = useTransform(scrollY, [0, 400], [0, -80])
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <section id="home" className="relative h-[100svh] w-full overflow-hidden bg-black text-white">
       <motion.div style={{ opacity }} className="absolute inset-0">
-        <Spline scene="https://prod.spline.design/N8g2VNcx8Rycz93J/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+        <React.Suspense fallback={<div className="w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(34,211,238,0.15),transparent_40%),radial-gradient(circle_at_70%_80%,rgba(168,85,247,0.15),transparent_40%)]" />}>
+          {mounted ? (
+            <Spline defaultScene="https://prod.spline.design/N8g2VNcx8Rycz93J/scene.splinecode" scene="https://prod.spline.design/N8g2VNcx8Rycz93J/scene.splinecode" style={{ width: '100%', height: '100%' }} />
+          ) : (
+            <div className="w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(34,211,238,0.15),transparent_40%),radial-gradient(circle_at_70%_80%,rgba(168,85,247,0.15),transparent_40%)]" />
+          )}
+        </React.Suspense>
       </motion.div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-black pointer-events-none" />

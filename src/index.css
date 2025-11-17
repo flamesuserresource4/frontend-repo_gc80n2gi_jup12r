@@ -15,10 +15,14 @@
   html {
     font-family: var(--font-sans);
     font-feature-settings: "rlig" 1, "calt" 1;
+    scroll-behavior: smooth; /* enable smooth anchor scrolling */
   }
 
   body {
     @apply antialiased;
+    overflow-x: hidden; /* prevent horizontal scroll on effects */
+    background: #000; /* ensure dark background globally */
+    color: #fff; /* default text color */
   }
 }
 
